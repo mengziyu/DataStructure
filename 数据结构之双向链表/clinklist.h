@@ -36,9 +36,9 @@ void release(LinkList* list) {
 
 bool add_last(LinkList* list, size_t sizeof_t,void* v) {
 	Node* tmp_last = list->last;
+
 	Node* new_node=(Node*)malloc(sizeof(Node));
 	new_node->data = malloc(sizeof_t);
-
 	char* tmp_data = (char*)new_node->data;
 	char* tmp_val = (char*)v;
 	//复制每个字节数据
@@ -63,9 +63,9 @@ bool add_last(LinkList* list, size_t sizeof_t,void* v) {
 
 bool add_first(LinkList* list, size_t sizeof_t,void* v) {
 	Node* tmp_first = list->first;
+
 	Node* new_node = (Node*)malloc(sizeof(Node));
 	new_node->data = malloc(sizeof_t);
-
 	char* tmp_data = (char*)new_node->data;
 	char* tmp_val = (char*)v;
 	//复制每个字节数据
@@ -76,6 +76,7 @@ bool add_first(LinkList* list, size_t sizeof_t,void* v) {
 
 	new_node->prev = NULL;
 	new_node->next = tmp_first;
+
 	list->first = new_node;
 	if (tmp_first == NULL) {
 		list->last = new_node;
@@ -134,10 +135,18 @@ bool add_index(LinkList* list, size_t sizeof_t,int index, void* v) {
 	}
 	else {
 		Node* in_node = node_index(list, index);
-		//把新节点添加到该节点前面
-		Node* new_node = (Node*)malloc(sizeof_t);
-		new_node->data = v;
+
+		Node* new_node = (Node*)malloc(sizeof(Node));
+		new_node->data = malloc(sizeof_t);
+		char* tmp_data = (char*)new_node->data;
+		char* tmp_val = (char*)v;
+		//复制每个字节数据
+		int i = 0;
+		for (; i < sizeof_t; i++) {
+			*(tmp_data + i) = *(tmp_val + i);
+		}
 		
+		//把新节点添加到该节点前面
 		in_node->prev->next = new_node;
 		new_node->prev = in_node->prev;
 		new_node->next = in_node;
