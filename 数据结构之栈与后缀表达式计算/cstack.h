@@ -19,7 +19,7 @@ struct Stack
 void copy_data2(void* dst, void* src, size_t sizeof_t) {
 	char* tmp_dst = (char*)dst;
 	char* tmp_src = (char*)src;
-	//复制每个字节数据
+	//澶嶅埗姣忎釜瀛楄妭鏁版嵁
 	int i = 0;
 	for (; i < sizeof_t; i++) {
 		*(tmp_dst + i) = *(tmp_src + i);
